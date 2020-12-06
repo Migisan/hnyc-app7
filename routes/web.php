@@ -13,9 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ログイン画面
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+// ユーザー認証画面
+Route::get('/register' , 'UserController@register');
+Route::post('/register', 'UserController@signup');
+Route::get('/login'    , 'UserController@login')->name('login');
+Route::post('/login'   , 'UserController@signin');
+Route::get('/logout'   , 'UserController@logout')->name('logout');
 
-// トップ(はがき作成)画面
-Route::get('/', 'TopController@index');
+// デフォルトログイン処理停止
+// Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// ルートの保護
+Route::middleware('auth')->group(function(){
+  // トップ(はがき作成)画面
+  Route::get('/', 'TopController@index');
+  
+  // マイページ画面
+  Route::get('/mypage', 'MypageController@index');
+});

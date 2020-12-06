@@ -1,9 +1,9 @@
 @extends('layouts.temp')
 
 @section('content')
-<section class="section">
+<section class="section mypage">
   <div class="section__inner">
-    はがき作成画面
+    マイページ
   </div><!-- section__inner -->
 </section>
 @endsection

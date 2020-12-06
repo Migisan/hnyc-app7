@@ -10,9 +10,17 @@
 
 /* ブレイクポイント */
 
+/* @mediaのフォーマット */
+
 /* @mediaのフォーマット(モバイルファースト) */
 
 /* font-size */
+
+/* layer */
+
+/* アスペクト比 */
+
+/* フォーム */
 
 /*-----------------------------------------------------
   ベース
@@ -90,17 +98,187 @@ img {
   text-align: center;
 }
 
-.section__inner {
-  margin: 0 15px;
+.section__inner,
+.header__inner {
+  max-width: 1140px;
+  padding: 0 20px;
+  margin: 0 auto;
 }
 
 /*-----------------------------------------------------
   ヘッダー
 ------------------------------------------------------*/
 
+header {
+  background-color: #5FA0D9;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+header a {
+  color: #fff;
+}
+
+header a:hover {
+  color: #fff;
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+}
+
+.header__ttl {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.nav__list {
+  display: inline-block;
+}
+
+.nav__link {
+  display: inline-block;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.hamburger-btn {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+}
+
 /*-----------------------------------------------------
   メイン
 ------------------------------------------------------*/
+
+/*- 登録フォーム -------------------------------------*/
+
+.register {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.register__ttl {
+  padding: 10px 20px;
+  background-color: #5FA0D9;
+  color: #fff;
+  font-weight: bold;
+}
+
+.register__form {
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.register__form table {
+  margin: 0 auto;
+}
+
+.register__form th {
+  text-align: right;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.register__form td {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.register__form td input {
+  padding: 4px 8px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.register__form button {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+/*- ログインフォーム -------------------------------------*/
+
+.login {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.login__ttl {
+  padding: 10px 20px;
+  background-color: #5FA0D9;
+  color: #fff;
+  font-weight: bold;
+}
+
+.login__form {
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.login__form table {
+  margin: 0 auto;
+}
+
+.login__form th {
+  text-align: right;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.login__form td {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.login__form td input {
+  padding: 4px 8px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.login__form button {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+/*- エラー表示 -------------------------------------*/
+
+.errors {
+  max-width: 600px;
+  padding: 20px;
+  margin: 0 auto;
+  color: red;
+}
+
+.errors .error {
+  list-style: disc inside;
+}
 
 /*-----------------------------------------------------
   フッター
