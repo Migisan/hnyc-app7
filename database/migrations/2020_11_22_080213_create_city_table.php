@@ -17,7 +17,7 @@ class CreateCityTable extends Migration
             $table->id()->comment('ID');
             $table->string('name', 10)->comment('市町村');
             $table->string('kana', 10)->comment('市町村かな');
-            $table->integer('prefectuer_id')->comment('都道府県ID');
+            $table->integer('prefecture_id')->comment('都道府県ID');
             $table->timestamps();
             $table->softDeletes();
         });

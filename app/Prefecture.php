@@ -1,0 +1,31 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Prefecture extends Model
+{
+    /**
+     * モデルと関連しているテーブル指定
+     *
+     * @var string
+     */
+    protected $table = 'prefecture';
+
+    /*
+     * 市町村リレーション(従)
+     */
+    public function citys(){
+        return $this->hasMany('App\City', 'prefecture_id', 'id');
+    }
+
+    /*
+     * 差出人リレーション(従)
+     */
+
+    /*
+     * 宛先人リレーション(従)
+     */
+
+}

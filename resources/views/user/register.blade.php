@@ -3,7 +3,8 @@
 @section('userTitle', '新規会員登録')
 
 @section('content')
-<section class="section">
+<section class="section
+">
   <div class="section__inner">
     <!-- 登録フォーム -->
     <div class="register">

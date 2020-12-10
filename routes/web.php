@@ -31,4 +31,10 @@ Route::middleware('auth')->group(function(){
   
   // マイページ画面
   Route::get('/mypage', 'MypageController@index');
+  
+  // ユーザー情報画面
+  // 差出人管理画面
+  Route::get('/from', 'FromController@index');
+  // 宛先人管理画面
+  // 送付履歴管理画面
 });
