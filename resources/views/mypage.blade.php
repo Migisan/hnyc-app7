@@ -17,6 +17,12 @@
         </tr>
       </table>
     </div><!-- user-info -->
+    <div class="from-info">
+      <h3>差出人情報</h3>
+      <table class="from-info__table">
+      </table>
+      <a href="/from" class="from-info__btn">差出人管理画面</a>
+    </div><!-- from-info -->
   </div><!-- section__inner -->
 </section><!-- mypage -->
 @endsection

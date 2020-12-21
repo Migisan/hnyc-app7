@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class From extends Model
 {
     /**
      * モデルと関連しているテーブル指定
      *
      * @var string
      */
-    protected $table = 'city';
+    protected $table = 'from';
 
     /*
      * 都道府県リレーション(主)
@@ -21,14 +21,17 @@ class City extends Model
     }
 
     /*
-     * 差出人リレーション(従)
+     * 市町村リレーション(主)
      */
-    public function froms(){
-        return $this->hasMany('App\From', 'prefecture_id', 'id');
+    public function city(){
+        return $this->belongsTo('App\City', 'city_id', 'id');
     }
 
     /*
-     * 宛先人リレーション(従)
+     * ユーザーリレーション(主)
      */
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 
 }

@@ -12,9 +12,9 @@ class CitySeeder extends Seeder
     public function run()
     {
         /*
-         * データクリア
+         * データ初期設定
          */
-        DB::table('city')->truncate();
+        // DB::table('city')->truncate();
         $now = new DateTime();
 
         /*

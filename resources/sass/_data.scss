@@ -113,49 +113,21 @@ $layer: (
   }
 }
 
-/* フォーム */
-@mixin form{
-  max-width: 600px;
-  margin: 0 auto;
+@mixin btn-design{
+  padding: 5px 10px;
+  border-bottom: 5px solid darken($mainColor, 20%);
   border-radius: 20px;
-  overflow: hidden;
-  &__ttl{
-    padding: 10px 20px;
-    background-color: $mainColor;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: $mainColor;
+  color: $mainWhiteFont;
+  &:hover{
     color: $mainWhiteFont;
-    font-weight: bold;
   }
-  &__form{
-    padding: 10px 0;
-    background-color: $bgWhite;
-    text-align: center;
-    box-sizing: content-box;
-    table{
-      margin: 0 auto;
-    }
-    th{
-      text-align: right;
-      vertical-align: middle;
-      line-height: 1;
-    }
-    td{
-      padding-left: 20px;
-      padding-bottom: 10px;
-      font-weight: bold;
-      input{
-        padding: 4px 8px;
-        border: 1px solid #000;
-        border-radius: 10px;
-      }
-    }
-    button{
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-weight: bold;
-      letter-spacing: 5px;
-      text-indent: 5px;
-      background-color: $mainColor;
-      color: $mainWhiteFont;
-    }
+  &:active{
+    position: relative;
+    top: 5px;
+    border: none;
   }
 }

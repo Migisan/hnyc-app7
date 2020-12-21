@@ -14,11 +14,14 @@ class CreatePrefectureTable extends Migration
     public function up()
     {
         Schema::create('prefecture', function (Blueprint $table) {
+            // カラム設定
             $table->id()->comment('ID');
             $table->string('name', 10)->comment('都道府県');
             $table->string('kana', 10)->comment('都道府県かな');
             $table->timestamps();
             $table->softDeletes();
+
+            // リレーション
         });
     }
 

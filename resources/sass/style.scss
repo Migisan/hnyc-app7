@@ -120,17 +120,59 @@ header{
 /*-----------------------------------------------------
   メイン
 ------------------------------------------------------*/
-/*- 登録フォーム -------------------------------------*/
+/*- ユーザ認証画面 ------------------------------------*/
+/* 認証フォームテンプレ */
+@mixin auth-form{
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  &__ttl{
+    padding: 10px 20px;
+    background-color: $mainColor;
+    color: $mainWhiteFont;
+    font-weight: bold;
+  }
+  &__form{
+    padding: 10px 0;
+    background-color: $bgWhite;
+    text-align: center;
+    box-sizing: content-box;
+    table{
+      margin: 0 auto;
+    }
+    th{
+      text-align: right;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    td{
+      padding-left: 20px;
+      padding-bottom: 10px;
+      font-weight: bold;
+      input{
+        padding: 4px 8px;
+        border: 1px solid #000;
+        border-radius: 10px;
+      }
+    }
+    button{
+      @include btn-design;
+    }
+  }
+}
+
+/* 登録フォーム */
 .register{
-  @include form;
+  @include auth-form;
 }
 
-/*- ログインフォーム -------------------------------------*/
+/* ログインフォーム */
 .login{
-  @include form;
+  @include auth-form;
 }
 
-/*- エラー表示 -------------------------------------*/
+/* エラー表示 */
 .errors{
   max-width: 600px;
   padding: 20px;
@@ -149,13 +191,14 @@ header{
   }
 }
 
-.user-info{
+/* 情報テーブルテンプレ */
+@mixin mypage-info{
   h3{
     margin-bottom: 20px;
   }
   width: 80%;
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   border-collapse: collapse;
   &__table{
     width: 100%;
@@ -171,6 +214,74 @@ header{
       width: 70%;
     }
   }
+  &__btn{
+    @include btn-design;
+  }
+}
+
+/* ユーザー情報 */
+.user-info{
+  @include mypage-info;
+}
+
+/* 差出人情報 */
+.from-info{
+  @include mypage-info;
+}
+
+/*- 管理画面 -------------------------------------*/
+/* 管理フォームテンプレ */
+@mixin mng-form{
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  &__ttl{
+    padding: 10px 20px;
+    background-color: $mainColor;
+    color: $mainWhiteFont;
+    font-weight: bold;
+  }
+  &__form{
+    padding: 10px 0;
+    background-color: $bgWhite;
+    text-align: center;
+    box-sizing: content-box;
+    table{
+      margin: 0 auto;
+    }
+    th{
+      text-align: right;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    td{
+      padding-left: 20px;
+      padding-bottom: 10px;
+      font-weight: bold;
+      input, select{
+        width: 100%;
+        padding: 4px 8px;
+        border: 1px solid #000;
+        border-radius: 10px;
+      }
+    }
+    button{
+      @include btn-design;
+    }
+  }
+}
+
+/*- 差出人管理画面 -------------------------------------*/
+.from{
+  h2{
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}
+
+.from-create{
+  @include mng-form;
 }
 
 /*-----------------------------------------------------

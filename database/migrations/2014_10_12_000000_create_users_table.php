@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            // カラム設定
             $table->id()->comment('ID');
             $table->string('l_name', 50)->comment('姓');
             $table->string('f_name', 50)->comment('名');
@@ -23,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken()->comment('トークン');
             $table->timestamps();
             $table->softDeletes();
+
+            // リレーション設定
         });
     }
 

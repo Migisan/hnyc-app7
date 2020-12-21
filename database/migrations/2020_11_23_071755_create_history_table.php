@@ -14,12 +14,18 @@ class CreateHistoryTable extends Migration
     public function up()
     {
         Schema::create('history', function (Blueprint $table) {
+            // カラム設定
             $table->id()->comment('ID');
-            $table->integer('user_id')->comment('ユーザーID');
-            $table->integer('from_id')->comment('差出人ID');
-            $table->integer('destination_id')->comment('宛先人ID');
+            $table->unsignedBigInteger('user_id')->comment('ユーザーID');
+            $table->unsignedBigInteger('from_id')->comment('差出人ID');
+            $table->unsignedBigInteger('destination_id')->comment('宛先人ID');
             $table->timestamps();
             $table->softDeletes();
+
+            // リレーション
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('from_id')->references('id')->on('from');
+            $table->foreign('destination_id')->references('id')->on('destination');
         });
     }
 

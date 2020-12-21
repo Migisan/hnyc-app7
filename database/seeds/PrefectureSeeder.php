@@ -12,9 +12,9 @@ class PrefectureSeeder extends Seeder
     public function run()
     {
         /*
-         * データクリア
+         * データ初期設定
          */
-        DB::table('prefecture')->truncate();
+        // DB::table('prefecture')->truncate();
         $now = new DateTime();
 
         /*

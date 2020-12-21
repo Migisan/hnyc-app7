@@ -14,12 +14,16 @@ class CreateCityTable extends Migration
     public function up()
     {
         Schema::create('city', function (Blueprint $table) {
+            // カラム設定
             $table->id()->comment('ID');
             $table->string('name', 10)->comment('市町村');
             $table->string('kana', 10)->comment('市町村かな');
-            $table->integer('prefecture_id')->comment('都道府県ID');
+            $table->unsignedBigInteger('prefecture_id')->comment('都道府県ID');
             $table->timestamps();
             $table->softDeletes();
+
+            // リレーション
+            $table->foreign('prefecture_id')->references('id')->on('prefecture');
         });
     }
 

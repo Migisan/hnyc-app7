@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function(){
   // ユーザー情報画面
   // 差出人管理画面
   Route::get('/from', 'FromController@index');
+  Route::post('/from/create', 'FromController@create');
   // 宛先人管理画面
   // 送付履歴管理画面
 });

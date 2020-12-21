@@ -21,8 +21,11 @@ class Prefecture extends Model
     }
 
     /*
-     * 差出人リレーション(従)
-     */
+    * 差出人リレーション(従)
+    */
+    public function froms(){
+        return $this->hasMany('App\From', 'prefecture_id', 'id');
+    }
 
     /*
      * 宛先人リレーション(従)
