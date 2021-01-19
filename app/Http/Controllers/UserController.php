@@ -22,24 +22,26 @@ class UserController extends Controller
     public function signup(Request $request){
         // バリデーション
         $validateRule = [
-            'l_name'   => ['required', 'max:50'],
-            'f_name'   => ['required', 'max:50'],
+            'l_name'   => ['required', 'string', 'max:50'],
+            'f_name'   => ['required', 'string', 'max:50'],
             'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'min:8', 'max:255', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$/'],
         ];
         $validateMsg = [
-            'l_name.required' => '姓は必須項目です。',
-            'l_name.max'      => '姓は50文字以内です。',
-            'f_name.required' => '名は必須項目です。',
-            'l_name.max'      => '名は50文字以内です。',
-            'email.required' => 'メールアドレスは必須項目です。',
-            'email.email' => 'メールアドレス形式で入力してください。',
-            'email.max' => 'メールアドレスは255文字以内です。',
-            'email.unique' => '入力されたメールアドレスは既に登録されています。',
+            'l_name.required'   => '姓は必須項目です。',
+            'l_name.string'     => '姓は文字列で入力してください。',
+            'l_name.max'        => '姓は50文字以内です。',
+            'f_name.required'   => '名は必須項目です。',
+            'f_name.string'     => '名は文字列で入力してください。',
+            'f_name.max'        => '名は50文字以内です。',
+            'email.required'    => 'メールアドレスは必須項目です。',
+            'email.email'       => 'メールアドレス形式で入力してください。',
+            'email.max'         => 'メールアドレスは255文字以内です。',
+            'email.unique'      => '入力されたメールアドレスは既に登録されています。',
             'password.required' => 'パスワードは必須項目です。',
-            'password.min' => 'パスワードは8文字以上です。',
-            'password.max' => 'パスワードは255文字以内です。',
-            'password.regex' => 'パスワードは英小文字、英大文字、数字をそれぞれ1文字以上含んで入力してください。',
+            'password.min'      => 'パスワードは8文字以上です。',
+            'password.max'      => 'パスワードは255文字以内です。',
+            'password.regex'    => 'パスワードは英小文字、英大文字、数字をそれぞれ1文字以上含んで入力してください。',
         ];
         $this->validate($request, $validateRule, $validateMsg);
 
@@ -47,7 +49,6 @@ class UserController extends Controller
         $user = new User;
         $input = $request->all();
         $input['password'] = Hash::make($input['password']); // パスワードハッシュ化
-        unset($input['_token']); // トークン削除
         
         // 保存
         $user->fill($input)->save();

@@ -14,6 +14,13 @@ class From extends Model
     protected $table = 'from';
 
     /*
+     * ホワイトリスト
+     */
+    protected $fillable = [
+        'l_name', 'f_name', 'prefecture_id', 'city_id', 'address_etc', 'postal_code', 'user_id'
+    ];
+
+    /*
      * 都道府県リレーション(主)
      */
     public function prefecture(){

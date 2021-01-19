@@ -8,6 +8,7 @@ $mainWhiteFont: #fff;
 $bgWhite      : #fff;
 $mainColor    : #5FA0D9;
 $subColor     : #F2CB05;
+$bdColor      : #CCCCCC;
 $redFont      : red;
 
 // font-family
@@ -114,6 +115,7 @@ $layer: (
 }
 
 @mixin btn-design{
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid darken($mainColor, 20%);
   border-radius: 20px;

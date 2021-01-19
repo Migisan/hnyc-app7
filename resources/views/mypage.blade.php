@@ -23,6 +23,12 @@
       </table>
       <a href="/from" class="from-info__btn">差出人管理画面</a>
     </div><!-- from-info -->
+    <div class="destination-info">
+      <h3>宛先人情報</h3>
+      <table class="destination-info__table">
+      </table>
+      <a href="/destination" class="destination-info__btn">宛先人管理画面</a>
+    </div><!-- destination-info -->
   </div><!-- section__inner -->
 </section><!-- mypage -->
 @endsection

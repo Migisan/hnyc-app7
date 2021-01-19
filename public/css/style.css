@@ -205,6 +205,7 @@ header a:hover {
 }
 
 .register__form button {
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid #286daa;
   border-radius: 20px;
@@ -271,6 +272,7 @@ header a:hover {
 }
 
 .login__form button {
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid #286daa;
   border-radius: 20px;
@@ -346,6 +348,7 @@ header a:hover {
 }
 
 .user-info__btn {
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid #286daa;
   border-radius: 20px;
@@ -399,6 +402,7 @@ header a:hover {
 }
 
 .from-info__btn {
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid #286daa;
   border-radius: 20px;
@@ -419,9 +423,89 @@ header a:hover {
   border: none;
 }
 
+/* 宛先人情報 */
+
+.destination-info {
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto 20px;
+  border-collapse: collapse;
+}
+
+.destination-info h3 {
+  margin-bottom: 20px;
+}
+
+.destination-info__table {
+  width: 100%;
+  background-color: #fff;
+}
+
+.destination-info__table th,
+.destination-info__table td {
+  padding: 5px 10px;
+  border: 1px solid #000;
+}
+
+.destination-info__table th {
+  width: 30%;
+}
+
+.destination-info__table td {
+  width: 70%;
+}
+
+.destination-info__btn {
+  display: inline-block;
+  padding: 5px 10px;
+  border-bottom: 5px solid #286daa;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+.destination-info__btn:hover {
+  color: #fff;
+}
+
+.destination-info__btn:active {
+  position: relative;
+  top: 5px;
+  border: none;
+}
+
 /*- 管理画面 -------------------------------------*/
 
 /* 管理フォームテンプレ */
+
+/* 管理リストテンプレ */
+
+.from-lists__ttl {
+  margin-bottom: 10px;
+}
+
+.from-lists__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.from-lists__table th,
+.from-lists__table td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.from-lists__table th {
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.from-lists__table td {
+  background-color: #fff;
+}
 
 /*- 差出人管理画面 -------------------------------------*/
 
@@ -476,6 +560,7 @@ header a:hover {
 }
 
 .from-create__form button {
+  display: inline-block;
   padding: 5px 10px;
   border-bottom: 5px solid #286daa;
   border-radius: 20px;
