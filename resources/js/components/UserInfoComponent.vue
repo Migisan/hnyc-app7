@@ -1,6 +1,6 @@
 <template>
   <div class="from-create">
-    <h3 class="from-create__ttl">差出人登録フォーム</h3>
+    <h3 class="from-create__ttl">ユーザー情報フォーム</h3>
     <form action="/from/create" method="POST" class="from-create__form">
       <table>
         <tr>

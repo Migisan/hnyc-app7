@@ -98,7 +98,7 @@ img {
 
 .section__inner,
 .header__inner {
-  max-width: 1140px;
+  max-width: 960px;
   padding: 0 20px;
   margin: 0 auto;
 }
@@ -154,6 +154,13 @@ header a:hover {
 /*-----------------------------------------------------
   メイン
 ------------------------------------------------------*/
+
+/*- 共通 ------------------------------------*/
+
+h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 
 /*- ユーザ認証画面 ------------------------------------*/
 
@@ -308,43 +315,18 @@ header a:hover {
 
 /*- マイページ -------------------------------------*/
 
-.mypage h2 {
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
 /* 情報テーブルテンプレ */
 
 /* ユーザー情報 */
 
 .user-info {
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto 20px;
-  border-collapse: collapse;
-}
-
-.user-info h3 {
   margin-bottom: 20px;
 }
 
-.user-info__table {
-  width: 100%;
-  background-color: #fff;
-}
-
-.user-info__table th,
-.user-info__table td {
-  padding: 5px 10px;
-  border: 1px solid #000;
-}
-
-.user-info__table th {
-  width: 30%;
-}
-
-.user-info__table td {
-  width: 70%;
+.user-info__ttl {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .user-info__btn {
@@ -357,6 +339,7 @@ header a:hover {
   text-indent: 5px;
   background-color: #5FA0D9;
   color: #fff;
+  margin-left: 10px;
 }
 
 .user-info__btn:hover {
@@ -369,36 +352,61 @@ header a:hover {
   border: none;
 }
 
-/* 差出人情報 */
-
-.from-info {
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto 20px;
-  border-collapse: collapse;
+.user-info__btn:active {
+  margin-bottom: 5px;
 }
 
-.from-info h3 {
-  margin-bottom: 20px;
-}
-
-.from-info__table {
+.user-info__table--user {
   width: 100%;
+}
+
+.user-info__table--user th,
+.user-info__table--user td {
+  padding: 5px 10px;
+  border: 1px solid #CCCCCC;
+}
+
+.user-info__table--user th {
+  width: 30%;
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.user-info__table--user td {
+  width: 70%;
   background-color: #fff;
 }
 
-.from-info__table th,
-.from-info__table td {
+.user-info__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.user-info__table th,
+.user-info__table td {
+  border: 1px solid #CCCCCC;
   padding: 5px 10px;
-  border: 1px solid #000;
 }
 
-.from-info__table th {
-  width: 30%;
+.user-info__table th {
+  color: #fff;
+  background-color: #5FA0D9;
 }
 
-.from-info__table td {
-  width: 70%;
+.user-info__table td {
+  background-color: #fff;
+}
+
+/* 差出人情報 */
+
+.from-info {
+  margin-bottom: 20px;
+}
+
+.from-info__ttl {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .from-info__btn {
@@ -411,6 +419,7 @@ header a:hover {
   text-indent: 5px;
   background-color: #5FA0D9;
   color: #fff;
+  margin-left: 10px;
 }
 
 .from-info__btn:hover {
@@ -423,36 +432,61 @@ header a:hover {
   border: none;
 }
 
-/* 宛先人情報 */
-
-.destination-info {
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto 20px;
-  border-collapse: collapse;
+.from-info__btn:active {
+  margin-bottom: 5px;
 }
 
-.destination-info h3 {
-  margin-bottom: 20px;
-}
-
-.destination-info__table {
+.from-info__table--user {
   width: 100%;
+}
+
+.from-info__table--user th,
+.from-info__table--user td {
+  padding: 5px 10px;
+  border: 1px solid #CCCCCC;
+}
+
+.from-info__table--user th {
+  width: 30%;
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.from-info__table--user td {
+  width: 70%;
   background-color: #fff;
 }
 
-.destination-info__table th,
-.destination-info__table td {
+.from-info__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.from-info__table th,
+.from-info__table td {
+  border: 1px solid #CCCCCC;
   padding: 5px 10px;
-  border: 1px solid #000;
 }
 
-.destination-info__table th {
-  width: 30%;
+.from-info__table th {
+  color: #fff;
+  background-color: #5FA0D9;
 }
 
-.destination-info__table td {
-  width: 70%;
+.from-info__table td {
+  background-color: #fff;
+}
+
+/* 宛先人情報 */
+
+.destination-info {
+  margin-bottom: 20px;
+}
+
+.destination-info__ttl {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .destination-info__btn {
@@ -465,6 +499,7 @@ header a:hover {
   text-indent: 5px;
   background-color: #5FA0D9;
   color: #fff;
+  margin-left: 10px;
 }
 
 .destination-info__btn:hover {
@@ -477,42 +512,106 @@ header a:hover {
   border: none;
 }
 
+.destination-info__btn:active {
+  margin-bottom: 5px;
+}
+
+.destination-info__table--user {
+  width: 100%;
+}
+
+.destination-info__table--user th,
+.destination-info__table--user td {
+  padding: 5px 10px;
+  border: 1px solid #CCCCCC;
+}
+
+.destination-info__table--user th {
+  width: 30%;
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.destination-info__table--user td {
+  width: 70%;
+  background-color: #fff;
+}
+
+.destination-info__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.destination-info__table th,
+.destination-info__table td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.destination-info__table th {
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.destination-info__table td {
+  background-color: #fff;
+}
+
 /*- 管理画面 -------------------------------------*/
 
 /* 管理フォームテンプレ */
 
 /* 管理リストテンプレ */
 
-.from-lists__ttl {
+/*- ユーザー情報管理画面 -------------------------------------*/
+
+.user-info-lists__ttl {
   margin-bottom: 10px;
 }
 
-.from-lists__table {
+.user-info-lists__table--user {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.from-lists__table th,
-.from-lists__table td {
+.user-info-lists__table--user th,
+.user-info-lists__table--user td {
   border: 1px solid #CCCCCC;
   padding: 5px 10px;
 }
 
-.from-lists__table th {
+.user-info-lists__table--user th {
+  width: 30%;
   color: #fff;
   background-color: #5FA0D9;
 }
 
-.from-lists__table td {
+.user-info-lists__table--user td {
+  width: 70%;
+  background-color: #fff;
+}
+
+.user-info-lists__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.user-info-lists__table th,
+.user-info-lists__table td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.user-info-lists__table th {
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.user-info-lists__table td {
   background-color: #fff;
 }
 
 /*- 差出人管理画面 -------------------------------------*/
-
-.from h2 {
-  font-weight: bold;
-  margin-bottom: 20px;
-}
 
 .from-create {
   max-width: 600px;
@@ -579,6 +678,167 @@ header a:hover {
   position: relative;
   top: 5px;
   border: none;
+}
+
+.from-lists__ttl {
+  margin-bottom: 10px;
+}
+
+.from-lists__table--user {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.from-lists__table--user th,
+.from-lists__table--user td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.from-lists__table--user th {
+  width: 30%;
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.from-lists__table--user td {
+  width: 70%;
+  background-color: #fff;
+}
+
+.from-lists__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.from-lists__table th,
+.from-lists__table td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.from-lists__table th {
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.from-lists__table td {
+  background-color: #fff;
+}
+
+/*- 宛先人管理画面 -------------------------------------*/
+
+.destination-create {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.destination-create__ttl {
+  padding: 10px 20px;
+  background-color: #5FA0D9;
+  color: #fff;
+  font-weight: bold;
+}
+
+.destination-create__form {
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.destination-create__form table {
+  margin: 0 auto;
+}
+
+.destination-create__form th {
+  text-align: right;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.destination-create__form td {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.destination-create__form td input,
+.destination-create__form td select {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.destination-create__form button {
+  display: inline-block;
+  padding: 5px 10px;
+  border-bottom: 5px solid #286daa;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+.destination-create__form button:hover {
+  color: #fff;
+}
+
+.destination-create__form button:active {
+  position: relative;
+  top: 5px;
+  border: none;
+}
+
+.destination-lists__ttl {
+  margin-bottom: 10px;
+}
+
+.destination-lists__table--user {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.destination-lists__table--user th,
+.destination-lists__table--user td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.destination-lists__table--user th {
+  width: 30%;
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.destination-lists__table--user td {
+  width: 70%;
+  background-color: #fff;
+}
+
+.destination-lists__table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.destination-lists__table th,
+.destination-lists__table td {
+  border: 1px solid #CCCCCC;
+  padding: 5px 10px;
+}
+
+.destination-lists__table th {
+  color: #fff;
+  background-color: #5FA0D9;
+}
+
+.destination-lists__table td {
+  background-color: #fff;
 }
 
 /*-----------------------------------------------------

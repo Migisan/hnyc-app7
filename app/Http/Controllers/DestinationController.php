@@ -3,31 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\From;
+use App\Destination;
 use Illuminate\Support\Facades\Auth;
 
-class FromController extends Controller
+
+class DestinationController extends Controller
 {
     /**
-     * 差出人管理画面の表示
+     * 宛先人管理画面の表示
      *
      * @return view
      */
     public function index(){
-        $froms = From::all();
+        $destinations = Destination::all();
         $data = [
-            'froms' => $froms
+            'destinations' => $destinations
         ];
-        return view('from.index', $data);
+        return view('destination.index', $data);
     }
 
     /**
-     * 差出人登録処理
+     * 宛先人登録処理
      *
      * @param Request $request
      * @return redirect
      */
     public function create(Request $request){
+        // dd($request->all());
+
         // バリデーション
         $validateRule = [
             'l_name'        => ['required', 'string', 'max:50'],
@@ -55,16 +58,20 @@ class FromController extends Controller
         $this->validate($request, $validateRule, $validateMsg);
 
         // DB
-        $from = new From;
+        $destination = new Destination;
         $input = $request->all();
         $user = Auth::id();
         $input['user_id'] = $user;
+        // お気に入り追加
+        if(array_key_exists('favorite', $input)){
+            $input['favorite'] = 1;
+        }
         
         // 保存
-        $from->fill($input)->save();
+        $destination->fill($input)->save();
 
         // リダイレクト
-        return redirect('from');
+        return redirect('destination');
     }
 
 }

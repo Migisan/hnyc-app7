@@ -1,7 +1,7 @@
 <template>
-  <div class="from-create">
-    <h3 class="from-create__ttl">差出人登録フォーム</h3>
-    <form action="/from/create" method="POST" class="from-create__form">
+  <div class="destination-create">
+    <h3 class="destination-create__ttl">宛先人登録フォーム</h3>
+    <form action="/destination/create" method="POST" class="destination-create__form">
       <table>
         <tr>
           <th><label for="l_name">姓</label></th>
@@ -37,17 +37,21 @@
           <th><label for="postal_code">郵便番号</label></th>
           <td><input type="text" name="postal_code" id="postal_code" placeholder="郵便番号"></td>
         </tr>
+        <tr>
+          <th><label for="favorite">お気に入り</label></th>
+          <td><input type="checkbox" name="favorite" id="favorite"></td>
+        </tr>
       </table>
       <input type="hidden" name="_token" :value="csrf">
       <button type="submit">登録</button>
     </form>
-  </div><!-- from-create -->
+  </div><!-- destination-create -->
 </template>
 
 <script>
 const axios = require('axios');
 export default {
-  name: "FromComponent",
+  name: "DestinationComponent",
   data: function(){
     return {
       prefectures: [],

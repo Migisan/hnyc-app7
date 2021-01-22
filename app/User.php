@@ -44,18 +44,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /*
+    /**
      * 差出人リレーション(従)
+     *
+     * @return void
      */
     public function froms(){
         return $this->hasMany('App\From', 'user_id', 'id');
     }
-
-    /*
+    
+    /**
      * 宛先人リレーション(従)
+     *
+     * @return void
      */
-
-    /*
+    
+    /**
      * 送付履歴リレーション(従)
+     *
+     * @return void
      */
 }

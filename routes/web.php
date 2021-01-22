@@ -32,17 +32,22 @@ Route::middleware('auth')->group(function(){
   // マイページ画面
   Route::get('/mypage', 'MypageController@index');
   
-  // ユーザー情報画面
+  // ユーザー情報管理画面
+  Route::get('/user_info', 'UserInfoController@index')->name('user_info');
+
   // 差出人管理画面
   Route::get('/from', 'FromController@index')->name('from');
   Route::post('/from/create', 'FromController@create');
+
   // 宛先人管理画面
   Route::get('/destination', 'DestinationController@index')->name('destination');
   Route::post('/destination/create', 'DestinationController@create');
+
   // 送付履歴管理画面
 
   // 都道府県
   Route::get('/prefecture/json', 'PrefectureController@json');
+
   // 市町村
   Route::get('/city/json/{id}', 'CityController@json');
 });

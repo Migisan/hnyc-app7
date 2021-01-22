@@ -58,10 +58,9 @@ img{
 }
 
 .section__inner{
-  max-width: 1140px;
+  max-width: 960px;
   padding: 0 20px;
   margin: 0 auto;
-  // margin: 0 15px;
 }
 
 /*-----------------------------------------------------
@@ -120,6 +119,13 @@ header{
 /*-----------------------------------------------------
   メイン
 ------------------------------------------------------*/
+
+/*- 共通 ------------------------------------*/
+h2{
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 /*- ユーザ認証画面 ------------------------------------*/
 /* 認証フォームテンプレ */
 @mixin auth-form{
@@ -184,38 +190,51 @@ header{
 }
 
 /*- マイページ -------------------------------------*/
-.mypage{
-  h2{
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-}
-
 /* 情報テーブルテンプレ */
 @mixin mypage-info{
-  h3{
-    margin-bottom: 20px;
-  }
-  width: 80%;
-  max-width: 900px;
-  margin: 0 auto 20px;
-  border-collapse: collapse;
-  &__table{
-    width: 100%;
-    background-color: $bgWhite;
-    th, td{
-      padding: 5px 10px;
-      border: 1px solid #000;
-    }
-    th{
-      width: 30%;
-    }
-    td{
-      width: 70%;
-    }
+  margin-bottom: 20px;
+  &__ttl{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
   }
   &__btn{
     @include btn-design;
+    margin-left: 10px;
+    &:active{
+      margin-bottom: 5px;
+    }
+  }
+  &__table--user{
+    width: 100%;
+    th, td{
+      padding: 5px 10px;
+      border: 1px solid $bdColor;
+    }
+    th{
+      width: 30%;
+      color: $mainWhiteFont;
+      background-color: $mainColor;
+    }
+    td{
+      width: 70%;
+      background-color: $bgWhite;
+    }
+  }
+  &__table{
+    width: 100%;
+    margin-bottom: 20px;
+    th,td{
+      border: 1px solid $bdColor;
+      padding: 5px 10px;
+    }
+    th{
+      color: $mainWhiteFont;
+      background-color: $mainColor;
+    }
+    td{
+      background-color: $bgWhite;
+    }
   }
 }
 
@@ -278,9 +297,26 @@ header{
 }
 
 /* 管理リストテンプレ */
-.from-lists{
+@mixin mng-lists{
   &__ttl{
     margin-bottom: 10px;
+  }
+  &__table--user{
+    width: 100%;
+    margin-bottom: 20px;
+    th,td{
+      border: 1px solid $bdColor;
+      padding: 5px 10px;
+    }
+    th{
+      width: 30%;
+      color: $mainWhiteFont;
+      background-color: $mainColor;
+    }
+    td{
+      width: 70%;
+      background-color: $bgWhite;
+    }
   }
   &__table{
     width: 100%;
@@ -299,16 +335,27 @@ header{
   }
 }
 
-/*- 差出人管理画面 -------------------------------------*/
-.from{
-  h2{
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
+/*- ユーザー情報管理画面 -------------------------------------*/
+.user-info-lists{
+  @include mng-lists;
 }
 
+/*- 差出人管理画面 -------------------------------------*/
 .from-create{
   @include mng-form;
+}
+
+.from-lists{
+  @include mng-lists;
+}
+
+/*- 宛先人管理画面 -------------------------------------*/
+.destination-create{
+  @include mng-form;
+}
+
+.destination-lists{
+  @include mng-lists;
 }
 
 /*-----------------------------------------------------

@@ -6,10 +6,10 @@
     <nav class="nav">
       <ul class="nav__lists">
         <li class="nav__list">
-          <a class="nav__link" href="/mypage">マイページ</a>
+          <a class="nav__link" href="/">はがき作成画面</a>
         </li>
         <li class="nav__list">
-          <a class="nav__link" href="/">はがき作成画面</a>
+          <a class="nav__link" href="/mypage">マイページ</a>
         </li>
         <li class="nav__list">
           <a class="nav__link" href="/logout">ログアウト</a>
@@ -26,10 +26,10 @@
     <nav class="hamburger">
       <ul class="hamburger__lists">
         <li class="hamburger__list">
-          <a class="hamburger__link" href="/mypage">マイページ</a>
+          <a class="hamburger__link" href="/">はがき作成画面</a>
         </li>
         <li class="hamburger__list">
-          <a class="hamburger__link" href="/">はがき作成画面</a>
+          <a class="hamburger__link" href="/mypage">マイページ</a>
         </li>
         <li class="hamburger__list">
           <a class="hamburger__link" href="/logout">ログアウト</a>

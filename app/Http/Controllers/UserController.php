@@ -9,15 +9,22 @@ use App\User;
 
 class UserController extends Controller
 {
-    /*
+    /**
      * 新規会員登録画面の表示
+     * 
+     * @access public
+     * @return view
      */
     public function register(){
         return view('user.register');
     }
-
-    /*
+    
+    /**
      * 会員登録処理
+     *
+     * @access public
+     * @param Request $request
+     * @return view
      */
     public function signup(Request $request){
         // バリデーション
@@ -57,15 +64,22 @@ class UserController extends Controller
         return view('user.login');
     }
 
-    /*
+    /**
      * ログイン画面の表示
+     *
+     * @access public
+     * @return view
      */
     public function login(){
         return view('user.login');
     }
 
-    /*
+    /**
      * ログイン処理
+     *
+     * @access public
+     * @param Request
+     * @return redirect
      */
     public function signin(Request $request){
         // バリデーション
@@ -87,8 +101,11 @@ class UserController extends Controller
         }
     }
 
-    /*
+    /**
      * ログインアウト処理
+     *
+     * @access public
+     * @return redirect
      */
     public function logout(){
         Auth::logout();

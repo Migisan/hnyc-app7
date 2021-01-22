@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class From extends Model
+class Destination extends Model
 {
     /**
      * モデルと関連しているテーブル指定
      *
      * @var string
      */
-    protected $table = 'from';
+    protected $table = 'destination';
 
     /**
      * ホワイトリスト
@@ -19,7 +19,7 @@ class From extends Model
      * @var array
      */
     protected $fillable = [
-        'l_name', 'f_name', 'prefecture_id', 'city_id', 'address_etc', 'postal_code', 'user_id'
+        'l_name', 'f_name', 'prefecture_id', 'city_id', 'address_etc', 'postal_code', 'user_id', 'favorite'
     ];
 
     /**

@@ -7,8 +7,11 @@ use App\City;
 
 class CityController extends Controller
 {
-    /*
+    /**
      * 市町村JSONデータ
+     *
+     * @param id
+     * @return Json
      */
     public function json($id){
         return City::where('prefecture_id', $id)->get()->toJson();
