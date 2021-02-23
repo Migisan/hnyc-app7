@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__inner">
-    <h1 class="header__ttl"><a href="/">{{ config('app.name', 'はがきアプリ') }}</a></h1>
+    <h1 class="header__ttl">@yield('subTitle')</h1>
     <!-- ナビゲーション -->
     <!-- グローバルナビ -->
     <nav class="nav">

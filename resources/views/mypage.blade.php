@@ -1,9 +1,10 @@
 @extends('layouts.temp')
 
+@section('subTitle', 'マイページ')
+
 @section('content')
 <section class="section mypage">
   <div class="section__inner">
-    <h2>マイページ</h2>
     <div class="user-info">
       <div class="user-info__ttl">
         <h3>ユーザー情報</h3>

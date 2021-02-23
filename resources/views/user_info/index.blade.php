@@ -1,9 +1,10 @@
 @extends('layouts.temp')
 
+@section('subTitle', 'ユーザー情報管理画面')
+
 @section('content')
 <section class="section user-info">
   <div class="section__inner">
-    <h2>ユーザー情報管理画面</h2>
     <!-- ユーザー情報一覧 -->
     <div class="user-info-lists">
       <h3 class="user-info-lists__ttl">ユーザー情報</h3>

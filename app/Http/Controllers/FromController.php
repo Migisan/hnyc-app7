@@ -14,46 +14,25 @@ class FromController extends Controller
      * @return view
      */
     public function index(){
-        $froms = From::all();
-        $data = [
-            'froms' => $froms
-        ];
-        return view('from.index', $data);
+        return view('from.index');
     }
 
     /**
-     * 差出人登録処理
+     * 差出人一覧
+     *
+     * @return json
+     */
+    public function json(){
+        return From::where('user_id', Auth::id())->with('prefecture', 'city')->get()->toJson();
+    }
+
+    /**
+     * 差出人登録
      *
      * @param Request $request
-     * @return redirect
+     * @return json
      */
     public function create(Request $request){
-        // バリデーション
-        $validateRule = [
-            'l_name'        => ['required', 'string', 'max:50'],
-            'f_name'        => ['required', 'string', 'max:50'],
-            'prefecture_id' => ['required', 'integer'],
-            'city_id'       => ['required', 'integer'],
-            'address_etc'   => ['required', 'string', 'max:100'],
-            'postal_code'   => ['required', 'regex:/^\d{3}-\d{4}$/'],
-        ];
-        $validateMsg = [
-            'l_name.required'        => '姓は必須項目です。',
-            'l_name.string'          => '姓は文字列で入力してください。',
-            'l_name.max'             => '姓は50文字以内です。',
-            'f_name.required'        => '名は必須項目です。',
-            'f_name.string'          => '名は文字列で入力してください。',
-            'f_name.max'             => '名は50文字以内です。',
-            'prefecture_id.required' => '都道府県は必須項目です。',
-            'city_id.required'       => '市町村は必須項目です。',
-            'address_etc.required'   => '番地等は必須項目です。',
-            'address_etc.string'     => '番地等は文字列で入力してください。',
-            'address_etc.max'        => '番地等は100文字以内です。',
-            'postal_code.required'   => '郵便番号は必須項目です。',
-            'postal_code.regex'      => '郵便番号は000-0000の形式で入力してください。',
-        ];
-        $this->validate($request, $validateRule, $validateMsg);
-
         // DB
         $from = new From;
         $input = $request->all();
@@ -63,8 +42,61 @@ class FromController extends Controller
         // 保存
         $from->fill($input)->save();
 
-        // リダイレクト
-        return redirect('from');
+        // json
+        return response()->json([
+            'result' => "success",
+            'request' => $request
+        ]);
+    }
+
+    /**
+     * 更新フォームセット
+     *
+     * @param $id
+     * @return json
+     */
+    public function set_update($id){
+        return From::where('id', $id)->where('user_id', Auth::id())->first()->toJson();
+    }
+
+    /**
+     * 差出人更新
+     *
+     * @param Request $request
+     * @param $id
+     * @return json
+     */
+    public function update(Request $request, $id){
+        // DB
+        $from = From::find($id);
+        $input = $request->all();
+        $user = Auth::id();
+        $input['user_id'] = $user;
+        
+        // 保存
+        $from->fill($input)->save();
+
+        // json
+        return response()->json([
+            'result' => "success",
+            'request' => $request
+        ]);
+    }
+
+    /**
+     * 差出人削除
+     *
+     * @param $id
+     * @return json
+     */
+    public function delete($id){
+        // 論理削除
+        From::find($id)->delete();
+
+        // json
+        return response()->json([
+            'result' => "success"
+        ]);
     }
 
 }

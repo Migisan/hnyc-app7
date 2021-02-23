@@ -316,6 +316,12 @@ h2{
     td{
       width: 70%;
       background-color: $bgWhite;
+      &:nth-of-type(4){
+        text-align: center;
+      }
+      &:nth-of-type(5){
+        text-align: center;
+      }
     }
   }
   &__table{
@@ -331,6 +337,23 @@ h2{
     }
     td{
       background-color: $bgWhite;
+      &:nth-of-type(4){
+        text-align: center;
+      }
+      &:nth-of-type(5){
+        text-align: center;
+      }
+    }
+  }
+  button{
+    @include btn-design;
+    &.edit{
+      background-color: $greenBtn;
+      border-bottom: 5px solid darken($greenBtn, 20%);
+    }
+    &.delete{
+      background-color: $redBtn;
+      border-bottom: 5px solid darken($redBtn, 20%);
     }
   }
 }

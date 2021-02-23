@@ -591,6 +591,14 @@ h2 {
   background-color: #fff;
 }
 
+.user-info-lists__table--user td:nth-of-type(4) {
+  text-align: center;
+}
+
+.user-info-lists__table--user td:nth-of-type(5) {
+  text-align: center;
+}
+
 .user-info-lists__table {
   width: 100%;
   margin-bottom: 20px;
@@ -609,6 +617,46 @@ h2 {
 
 .user-info-lists__table td {
   background-color: #fff;
+}
+
+.user-info-lists__table td:nth-of-type(4) {
+  text-align: center;
+}
+
+.user-info-lists__table td:nth-of-type(5) {
+  text-align: center;
+}
+
+.user-info-lists button {
+  display: inline-block;
+  padding: 5px 10px;
+  border-bottom: 5px solid #286daa;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+.user-info-lists button:hover {
+  color: #fff;
+}
+
+.user-info-lists button:active {
+  position: relative;
+  top: 5px;
+  border: none;
+}
+
+.user-info-lists button.edit {
+  background-color: #58cf58;
+  border-bottom: 5px solid #2b962b;
+}
+
+.user-info-lists button.delete {
+  background-color: #dd3b3b;
+  border-bottom: 5px solid #981a1a;
 }
 
 /*- 差出人管理画面 -------------------------------------*/
@@ -706,6 +754,14 @@ h2 {
   background-color: #fff;
 }
 
+.from-lists__table--user td:nth-of-type(4) {
+  text-align: center;
+}
+
+.from-lists__table--user td:nth-of-type(5) {
+  text-align: center;
+}
+
 .from-lists__table {
   width: 100%;
   margin-bottom: 20px;
@@ -724,6 +780,46 @@ h2 {
 
 .from-lists__table td {
   background-color: #fff;
+}
+
+.from-lists__table td:nth-of-type(4) {
+  text-align: center;
+}
+
+.from-lists__table td:nth-of-type(5) {
+  text-align: center;
+}
+
+.from-lists button {
+  display: inline-block;
+  padding: 5px 10px;
+  border-bottom: 5px solid #286daa;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+.from-lists button:hover {
+  color: #fff;
+}
+
+.from-lists button:active {
+  position: relative;
+  top: 5px;
+  border: none;
+}
+
+.from-lists button.edit {
+  background-color: #58cf58;
+  border-bottom: 5px solid #2b962b;
+}
+
+.from-lists button.delete {
+  background-color: #dd3b3b;
+  border-bottom: 5px solid #981a1a;
 }
 
 /*- 宛先人管理画面 -------------------------------------*/
@@ -821,6 +917,14 @@ h2 {
   background-color: #fff;
 }
 
+.destination-lists__table--user td:nth-of-type(4) {
+  text-align: center;
+}
+
+.destination-lists__table--user td:nth-of-type(5) {
+  text-align: center;
+}
+
 .destination-lists__table {
   width: 100%;
   margin-bottom: 20px;
@@ -839,6 +943,46 @@ h2 {
 
 .destination-lists__table td {
   background-color: #fff;
+}
+
+.destination-lists__table td:nth-of-type(4) {
+  text-align: center;
+}
+
+.destination-lists__table td:nth-of-type(5) {
+  text-align: center;
+}
+
+.destination-lists button {
+  display: inline-block;
+  padding: 5px 10px;
+  border-bottom: 5px solid #286daa;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  background-color: #5FA0D9;
+  color: #fff;
+}
+
+.destination-lists button:hover {
+  color: #fff;
+}
+
+.destination-lists button:active {
+  position: relative;
+  top: 5px;
+  border: none;
+}
+
+.destination-lists button.edit {
+  background-color: #58cf58;
+  border-bottom: 5px solid #2b962b;
+}
+
+.destination-lists button.delete {
+  background-color: #dd3b3b;
+  border-bottom: 5px solid #981a1a;
 }
 
 /*-----------------------------------------------------

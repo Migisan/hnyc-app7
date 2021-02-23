@@ -3,15 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Destination extends Model
 {
+    use SoftDeletes;
     /**
      * モデルと関連しているテーブル指定
      *
      * @var string
      */
     protected $table = 'destination';
+
+    /**
+     * 論理削除カラム
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * ホワイトリスト

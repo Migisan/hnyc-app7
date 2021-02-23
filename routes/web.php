@@ -37,11 +37,19 @@ Route::middleware('auth')->group(function(){
 
   // 差出人管理画面
   Route::get('/from', 'FromController@index')->name('from');
+  Route::get('/from/json', 'FromController@json');
   Route::post('/from/create', 'FromController@create');
-
+  Route::get('/from/set_update/{id}', 'FromController@set_update');
+  Route::post('/from/update/{id}', 'FromController@update');
+  Route::delete('/from/delete/{id}', 'FromController@delete');
+  
   // 宛先人管理画面
   Route::get('/destination', 'DestinationController@index')->name('destination');
+  Route::get('/destination/json', 'DestinationController@json');
   Route::post('/destination/create', 'DestinationController@create');
+  Route::get('/destination/set_update/{id}', 'DestinationController@set_update');
+  Route::post('/destination/update/{id}', 'DestinationController@update');
+  Route::delete('/destination/delete/{id}', 'DestinationController@delete');
 
   // 送付履歴管理画面
 
