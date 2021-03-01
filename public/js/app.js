@@ -2663,16 +2663,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FromComponent",
   data: function data() {
     return {
+      user: [],
       prefectures: [],
-      prefecture_id: 0,
       citys: [],
-      city_id: 0
+      postData: {
+        l_name: '',
+        f_name: '',
+        email: ''
+      },
+      errors: [],
+      validateFlg: true,
+      updateId: 0
     };
   },
   props: {
@@ -2682,30 +2692,138 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    // 一覧セット
+    this.setList(); // 更新セット
 
-    // 都道府県セット
-    axios.get('/prefecture/json').then(function (res) {
-      _this.prefectures = res.data;
-    })["catch"](function (e) {
-      console.log(e.res.data.errors);
-    });
+    this.setUpdate();
   },
   methods: {
-    // 市町村セット
-    selectPrefecture: function selectPrefecture() {
-      var _this2 = this;
+    /**
+     * 一覧描画メソッド
+     */
+    setList: function setList() {
+      var _this = this;
 
-      // 都道府県ID
-      var id = this.prefecture_id; // 市町村IDリセット
-
-      this.city_id = 0; // 都道府県IDに該当する市町村データを取得
-
-      axios.get('/city/json/' + id).then(function (res) {
-        _this2.citys = res.data;
+      axios.get('/user_info/json').then(function (res) {
+        _this.user = res.data;
       })["catch"](function (e) {
         console.log(e.res.data.errors);
       });
+    },
+
+    /**
+     * 更新セットメソッド
+     */
+    setUpdate: function setUpdate() {
+      var _this2 = this;
+
+      // フォームセット
+      axios.get('/user_info/set_update').then(function (res) {
+        console.log(res);
+        _this2.postData.l_name = res.data.l_name;
+        _this2.postData.f_name = res.data.f_name;
+        _this2.postData.email = res.data.email;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+
+    /**
+     * 更新メソッド
+     */
+    update: function update() {
+      var _this3 = this;
+
+      // バリデーション
+      this.validate();
+
+      if (!this.validateFlg) {
+        return;
+      } // 更新処理
+
+
+      axios.post('/user_info/update', this.postData).then(function (res) {
+        console.log(res); // 一覧再描画
+
+        _this3.setList(); // 更新セット
+
+
+        _this3.setUpdate(); // アラート
+
+
+        alert("更新しました！");
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+
+    /**
+     * 退会メソッド
+     */
+    // del: function(){
+    //   if(!window.confirm('本当に退会しますか？')){
+    //     return false;
+    //   }
+    //   axios.delete('/user_info/delete').then(res => {
+    //     console.log(res);
+    //     // 一覧再描画
+    //     this.setList();
+    //     // フォームクリア
+    //     this.clearForm();
+    //   }).catch(e => {
+    //     console.log(e);
+    //   });
+    // },
+
+    /**
+     * バリデーションメソッド
+     */
+    validate: function validate() {
+      // エラークリア
+      this.validateFlg = true;
+      this.errors = []; // 姓
+
+      if (!this.postData.l_name) {
+        this.errors.push("姓は必須項目です。");
+        this.validateFlg = false;
+      } else if (!isNaN(parseInt(this.postData.l_name))) {
+        this.errors.push("姓は文字列で入力してください。");
+        this.validateFlg = false;
+      } else if (this.postData.l_name.length > 50) {
+        this.errors.push("姓は50文字以内で入力してください。");
+        this.validateFlg = false;
+      } // 名
+
+
+      if (!this.postData.f_name) {
+        this.errors.push("名は必須項目です。");
+        this.validateFlg = false;
+      } else if (!isNaN(parseInt(this.postData.f_name))) {
+        this.errors.push("名は文字列で入力してください。");
+        this.validateFlg = false;
+      } else if (this.postData.f_name.length > 50) {
+        this.errors.push("名は50文字以内で入力してください。");
+        this.validateFlg = false;
+      } // メールアドレス
+
+
+      if (!this.postData.email) {
+        this.errors.push("メールアドレスは必須項目です。");
+        this.validateFlg = false;
+      } else if (!this.postData.email.match(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+        this.errors.push("メールアドレスの形式で入力してください。");
+        this.validateFlg = false;
+      }
+    },
+
+    /**
+     * フォームクリアメソッド
+     */
+    clearForm: function clearForm() {
+      // フォームクリア
+      this.postData.l_name = '';
+      this.postData.f_name = '';
+      this.postData.email = '';
     }
   }
 });
@@ -39287,139 +39405,175 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "from-create" }, [
-    _c("h3", { staticClass: "from-create__ttl" }, [
-      _vm._v("ユーザー情報フォーム")
-    ]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "from-create__form",
-        attrs: { action: "/from/create", method: "POST" }
-      },
-      [
-        _c("table", [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _c("tr", [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.prefecture_id,
-                      expression: "prefecture_id"
-                    }
-                  ],
-                  attrs: { name: "prefecture_id", id: "prefecture_id" },
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.prefecture_id = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                      _vm.selectPrefecture
-                    ]
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "0" } }, [
-                    _vm._v("選択してください")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.prefectures, function(prefecture, key) {
-                    return _c(
-                      "option",
-                      { key: key, domProps: { value: prefecture.id } },
-                      [_vm._v(_vm._s(prefecture.name))]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("td", [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.city_id,
-                      expression: "city_id"
-                    }
-                  ],
-                  attrs: { name: "city_id", id: "city_id" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.city_id = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "0" } }, [
-                    _vm._v("選択してください")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.citys, function(city, key) {
-                    return _c(
-                      "option",
-                      { key: key, domProps: { value: city.id } },
-                      [_vm._v(_vm._s(city.name))]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5)
+  return _c("section", { staticClass: "section user-info" }, [
+    _c("div", { staticClass: "section__inner" }, [
+      _c("div", { staticClass: "user-info-lists" }, [
+        _c("h3", { staticClass: "user-info-lists__ttl" }, [
+          _vm._v("ユーザー情報")
         ]),
         _vm._v(" "),
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
+        _c("table", { staticClass: "user-info-lists__table--user" }, [
+          _c("tr", [
+            _c("th", [_vm._v("氏名")]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(_vm.user.l_name) + " " + _vm._s(_vm.user.f_name))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("th", [_vm._v("メールアドレス")]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(_vm.user.email))])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "user-info-update" }, [
+        _c("h3", { staticClass: "user-info-update__ttl" }, [
+          _vm._v("ユーザー情報編集フォーム")
+        ]),
         _vm._v(" "),
-        _c("button", { attrs: { type: "submit" } }, [_vm._v("登録")])
-      ]
-    )
+        _c(
+          "form",
+          {
+            staticClass: "user-info-update__form",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+              }
+            }
+          },
+          [
+            _c("table", [
+              _c("tr", [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.postData.l_name,
+                        expression: "postData.l_name"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      name: "l_name",
+                      id: "l_name",
+                      placeholder: "姓"
+                    },
+                    domProps: { value: _vm.postData.l_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.postData, "l_name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.postData.f_name,
+                        expression: "postData.f_name"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      name: "f_name",
+                      id: "f_name",
+                      placeholder: "名"
+                    },
+                    domProps: { value: _vm.postData.f_name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.postData, "f_name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.postData.email,
+                        expression: "postData.email"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      name: "email",
+                      id: "email",
+                      placeholder: "メールアドレス"
+                    },
+                    domProps: { value: _vm.postData.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.postData, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { attrs: { type: "submit" }, on: { click: _vm.update } },
+              [_vm._v("編集")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.validateFlg != true
+        ? _c(
+            "ul",
+            { staticClass: "errors" },
+            [
+              _vm._l(_vm.errors, function(error, key) {
+                return [
+                  _c("li", { key: key, staticClass: "error" }, [
+                    _vm._v(_vm._s(error))
+                  ])
+                ]
+              })
+            ],
+            2
+          )
+        : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = [
@@ -39427,96 +39581,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_c("label", { attrs: { for: "l_name" } }, [_vm._v("姓")])]),
-      _vm._v(" "),
-      _c("td", [
-        _c("input", {
-          attrs: {
-            type: "text",
-            name: "l_name",
-            id: "l_name",
-            placeholder: "姓"
-          }
-        })
-      ])
-    ])
+    return _c("th", [_c("label", { attrs: { for: "l_name" } }, [_vm._v("姓")])])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_c("label", { attrs: { for: "f_name" } }, [_vm._v("名")])]),
-      _vm._v(" "),
-      _c("td", [
-        _c("input", {
-          attrs: {
-            type: "text",
-            name: "f_name",
-            id: "f_name",
-            placeholder: "名"
-          }
-        })
-      ])
-    ])
+    return _c("th", [_c("label", { attrs: { for: "f_name" } }, [_vm._v("名")])])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("th", [
-      _c("label", { attrs: { for: "prefecture_id" } }, [_vm._v("都道府県")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("th", [
-      _c("label", { attrs: { for: "city_id" } }, [_vm._v("市町村")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [
-        _c("label", { attrs: { for: "address_etc" } }, [_vm._v("番地等")])
-      ]),
-      _vm._v(" "),
-      _c("td", [
-        _c("input", {
-          attrs: {
-            type: "text",
-            name: "address_etc",
-            id: "address_etc",
-            placeholder: "番地等"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [
-        _c("label", { attrs: { for: "postal_code" } }, [_vm._v("郵便番号")])
-      ]),
-      _vm._v(" "),
-      _c("td", [
-        _c("input", {
-          attrs: {
-            type: "text",
-            name: "postal_code",
-            id: "postal_code",
-            placeholder: "郵便番号"
-          }
-        })
-      ])
+      _c("label", { attrs: { for: "email" } }, [_vm._v("メールアドレス")])
     ])
   }
 ]

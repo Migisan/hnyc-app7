@@ -359,6 +359,10 @@ h2{
 }
 
 /*- ユーザー情報管理画面 -------------------------------------*/
+.user-info-update{
+  @include mng-form;
+}
+
 .user-info-lists{
   @include mng-lists;
 }

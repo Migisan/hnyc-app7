@@ -58,10 +58,17 @@ class User extends Authenticatable
      *
      * @return void
      */
+    public function destinations(){
+        return $this->hasMany('App\Destination', 'user_id', 'id');
+    }
     
     /**
      * 送付履歴リレーション(従)
      *
      * @return void
      */
+    // public function destinations(){
+    //     return $this->hasMany('App\Destination', 'user_id', 'id');
+    // }
+
 }

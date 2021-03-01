@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function(){
   
   // ユーザー情報管理画面
   Route::get('/user_info', 'UserInfoController@index')->name('user_info');
+  Route::get('/user_info/json', 'UserInfoController@json');
+  Route::get('/user_info/set_update', 'UserInfoController@set_update');
+  Route::post('/user_info/update', 'UserInfoController@update');
+  Route::delete('/user_info/delete', 'UserInfoController@delete');
 
   // 差出人管理画面
   Route::get('/from', 'FromController@index')->name('from');
