@@ -19,54 +19,58 @@
         </table><!-- .destination-lists__table -->
       </div><!-- .destination-lists -->
       <div class="destination-create">
-      <h3 class="destination-create__ttl" v-if="btnFlg == 'create'">宛先人登録フォーム</h3>
-      <h3 class="destination-create__ttl" v-else-if="btnFlg == 'update'">宛先人更新フォーム</h3>
-      <form @submit.prevent class="destination-create__form">
-        <table>
-          <tr>
-            <th><label for="l_name">姓</label></th>
-            <td><input v-model="postData.l_name" type="text" name="l_name" id="l_name" placeholder="姓"></td>
-          </tr>
-          <tr>
-            <th><label for="f_name">名</label></th>
-            <td><input v-model="postData.f_name" type="text" name="f_name" id="f_name" placeholder="名"></td>
-          </tr>
-          <tr>
-            <th><label for="prefecture_id">都道府県</label></th>
-            <td>
-              <select name="prefecture_id" id="prefecture_id" v-model="postData.prefecture_id" @change="setCity">
-                <option value="0">選択してください</option>
-                <option v-for="(prefecture, key) in prefectures" :key="key" :value="prefecture.id">{{ prefecture.name }}</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th><label for="city_id">市町村</label></th>
-            <td>
-              <select name="city_id" id="city_id" v-model="postData.city_id">
-                <option value="0">選択してください</option>
-                <option v-for="(city, key) in citys" :key="key" :value="city.id">{{ city.name }}</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th><label for="address_etc">番地等</label></th>
-            <td><input v-model="postData.address_etc" type="text" name="address_etc" id="address_etc" placeholder="番地等"></td>
-          </tr>
-          <tr>
-            <th><label for="postal_code">郵便番号</label></th>
-            <td><input v-model="postData.postal_code" type="text" name="postal_code" id="postal_code" placeholder="郵便番号"></td>
-          </tr>
-          <tr>
-            <th><label for="favorite">お気に入り</label></th>
-            <td><input v-model="postData.favorite" type="checkbox" name="favorite" id="favorite"></td>
-          </tr>
-        </table>
-        <input type="hidden" name="_token" :value="csrf">
-        <button type="submit" v-if="btnFlg == 'create'" @click="create">登録</button>
-        <button type="submit" v-else-if="btnFlg == 'update'" @click="update">更新</button>
-      </form>
+        <h3 class="destination-create__ttl" v-if="btnFlg == 'create'">宛先人登録フォーム</h3>
+        <h3 class="destination-create__ttl" v-else-if="btnFlg == 'update'">宛先人更新フォーム</h3>
+        <h3 class="destination-create__ttl" v-else-if="btnFlg == 'search'">宛先人検索フォーム</h3>
+        <form @submit.prevent class="destination-create__form">
+          <table>
+            <tr>
+              <th><label for="l_name">姓</label></th>
+              <td><input v-model="postData.l_name" type="text" name="l_name" id="l_name" placeholder="姓"></td>
+            </tr>
+            <tr>
+              <th><label for="f_name">名</label></th>
+              <td><input v-model="postData.f_name" type="text" name="f_name" id="f_name" placeholder="名"></td>
+            </tr>
+            <tr>
+              <th><label for="prefecture_id">都道府県</label></th>
+              <td>
+                <select name="prefecture_id" id="prefecture_id" v-model="postData.prefecture_id" @change="setCity">
+                  <option value="0">選択してください</option>
+                  <option v-for="(prefecture, key) in prefectures" :key="key" :value="prefecture.id">{{ prefecture.name }}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="city_id">市町村</label></th>
+              <td>
+                <select name="city_id" id="city_id" v-model="postData.city_id">
+                  <option value="0">選択してください</option>
+                  <option v-for="(city, key) in citys" :key="key" :value="city.id">{{ city.name }}</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="address_etc">番地等</label></th>
+              <td><input v-model="postData.address_etc" type="text" name="address_etc" id="address_etc" placeholder="番地等"></td>
+            </tr>
+            <tr>
+              <th><label for="postal_code">郵便番号</label></th>
+              <td><input v-model="postData.postal_code" type="text" name="postal_code" id="postal_code" placeholder="郵便番号"></td>
+            </tr>
+            <tr>
+              <th><label for="favorite">お気に入り</label></th>
+              <td><input v-model="postData.favorite" type="checkbox" name="favorite" id="favorite"></td>
+            </tr>
+          </table>
+          <input type="hidden" name="_token" :value="csrf">
+          <button type="submit" v-if="btnFlg == 'create'" @click="create">登録</button>
+          <button type="submit" v-else-if="btnFlg == 'update'" @click="update">更新</button>
+          <button type="submit" v-else-if="btnFlg == 'search'" @click="search">検索</button>
+        </form>
       </div><!-- destination-create -->
+      <!-- 切り替えボタン -->
+      <div class="changeBtn" @click="changeForm()"><i class="fas fa-exchange-alt"></i></div><!-- .changeBtn -->
       <!-- エラー一覧 -->
       <ul v-if="validateFlg != true" class="errors">
         <template v-for="(error, key) in errors">
@@ -214,6 +218,21 @@ export default {
       });
     },
     /**
+     * 検索メソッド
+     */
+    search: function(){
+      // 検索処理
+      axios.post('/destination/search', this.postData).then(res => {
+        console.log(res);
+        // 検索結果描画
+        this.destinations = res.data;
+        // フォームクリア
+        this.clearForm();
+      }).catch(e => {
+        console.log(e);
+      });
+    },
+    /**
      * 削除メソッド
      */
     del: function(id){
@@ -312,6 +331,16 @@ export default {
       this.postData.city_id = 0;
       this.postData.address_etc = '';
       this.postData.postal_code = '';
+    },
+    /**
+     * フォーム切り替えメソッド
+     */
+    changeForm: function(){
+      if(this.btnFlg == 'create'){
+        this.btnFlg = 'search';
+      }else{
+        this.clearForm();
+      }
     }
   }
 }

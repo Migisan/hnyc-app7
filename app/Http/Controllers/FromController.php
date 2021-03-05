@@ -84,6 +84,38 @@ class FromController extends Controller
     }
 
     /**
+     * 差出人検索
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function search(Request $request){
+        $params = $request->all();
+        $from = From::where('user_id', Auth::id());
+        
+        if($request->l_name){
+            $from->searchLastName($request->l_name);
+        }
+        if($request->f_name){
+            $from->searchFirstName($request->f_name);
+        }
+        if($request->prefecture_id){
+            $from->searchPrefecture($request->prefecture_id);
+        }
+        if($request->city_id){
+            $from->searchCity($request->city_id);
+        }
+        if($request->address_etc){
+            $from->searchAddressEtc($request->address_etc);
+        }
+        if($request->postal_code){
+            $from->searchPostalCode($request->postal_code);
+        }
+
+        return $from->with('prefecture', 'city')->get()->toJson();
+    }
+
+    /**
      * 差出人削除
      *
      * @param $id

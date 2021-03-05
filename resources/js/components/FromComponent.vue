@@ -19,10 +19,11 @@
           </template>
         </table><!-- from-lists__table -->
       </div><!-- from-lists -->
-      <!-- 差出人登録フォーム -->
+      <!-- 差出人フォーム -->
       <div class="from-create">
         <h3 class="from-create__ttl" v-if="btnFlg == 'create'">差出人登録フォーム</h3>
         <h3 class="from-create__ttl" v-else-if="btnFlg == 'update'">差出人更新フォーム</h3>
+        <h3 class="from-create__ttl" v-else-if="btnFlg == 'search'">差出人検索フォーム</h3>
         <form @submit.prevent class="from-create__form">
           <table>
             <tr>
@@ -63,8 +64,11 @@
           <input type="hidden" name="_token" :value="csrf">
           <button type="submit" v-if="btnFlg == 'create'" @click="create">登録</button>
           <button type="submit" v-else-if="btnFlg == 'update'" @click="update">更新</button>
+          <button type="submit" v-else-if="btnFlg == 'search'" @click="search">検索</button>
         </form>
       </div><!-- from-create -->
+      <!-- 切り替えボタン -->
+      <div class="changeBtn" @click="changeForm()"><i class="fas fa-exchange-alt"></i></div><!-- .changeBtn -->
       <!-- エラー一覧 -->
       <ul v-if="validateFlg != true" class="errors">
         <template v-for="(error, key) in errors">
@@ -211,6 +215,21 @@ export default {
       });
     },
     /**
+     * 検索メソッド
+     */
+    search: function(){
+      // 検索処理
+      axios.post('/from/search', this.postData).then(res => {
+        console.log(res);
+        // 検索結果描画
+        this.froms = res.data;
+        // フォームクリア
+        this.clearForm();
+      }).catch(e => {
+        console.log(e);
+      });
+    },
+    /**
      * 削除メソッド
      */
     del: function(id){
@@ -309,6 +328,16 @@ export default {
       this.postData.city_id = 0;
       this.postData.address_etc = '';
       this.postData.postal_code = '';
+    },
+    /**
+     * フォーム切り替えメソッド
+     */
+    changeForm: function(){
+      if(this.btnFlg == 'create'){
+        this.btnFlg = 'search';
+      }else{
+        this.clearForm();
+      }
     }
   }
 }

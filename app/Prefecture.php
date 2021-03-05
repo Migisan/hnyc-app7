@@ -36,4 +36,7 @@ class Prefecture extends Model
      *
      * @return void
      */
+    public function destinations(){
+        return $this->hasMany('App\Destination', 'prefecture_id', 'id');
+    }
 }

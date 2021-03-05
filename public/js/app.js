@@ -1987,6 +1987,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2148,10 +2152,28 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
     },
 
     /**
+     * 検索メソッド
+     */
+    search: function search() {
+      var _this7 = this;
+
+      // 検索処理
+      axios.post('/destination/search', this.postData).then(function (res) {
+        console.log(res); // 検索結果描画
+
+        _this7.destinations = res.data; // フォームクリア
+
+        _this7.clearForm();
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+
+    /**
      * 削除メソッド
      */
     del: function del(id) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (!window.confirm('本当に削除しますか？')) {
         return false;
@@ -2160,10 +2182,10 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       axios["delete"]('/destination/delete/' + id).then(function (res) {
         console.log(res); // 一覧再描画
 
-        _this7.setList(); // フォームクリア
+        _this8.setList(); // フォームクリア
 
 
-        _this7.clearForm();
+        _this8.clearForm();
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2249,6 +2271,17 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       this.postData.city_id = 0;
       this.postData.address_etc = '';
       this.postData.postal_code = '';
+    },
+
+    /**
+     * フォーム切り替えメソッド
+     */
+    changeForm: function changeForm() {
+      if (this.btnFlg == 'create') {
+        this.btnFlg = 'search';
+      } else {
+        this.clearForm();
+      }
     }
   }
 });
@@ -2264,6 +2297,10 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2501,10 +2538,28 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
     },
 
     /**
+     * 検索メソッド
+     */
+    search: function search() {
+      var _this7 = this;
+
+      // 検索処理
+      axios.post('/from/search', this.postData).then(function (res) {
+        console.log(res); // 検索結果描画
+
+        _this7.froms = res.data; // フォームクリア
+
+        _this7.clearForm();
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+
+    /**
      * 削除メソッド
      */
     del: function del(id) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (!window.confirm('本当に削除しますか？')) {
         return false;
@@ -2513,10 +2568,10 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       axios["delete"]('/from/delete/' + id).then(function (res) {
         console.log(res); // 一覧再描画
 
-        _this7.setList(); // フォームクリア
+        _this8.setList(); // フォームクリア
 
 
-        _this7.clearForm();
+        _this8.clearForm();
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2602,6 +2657,17 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
       this.postData.city_id = 0;
       this.postData.address_etc = '';
       this.postData.postal_code = '';
+    },
+
+    /**
+     * フォーム切り替えメソッド
+     */
+    changeForm: function changeForm() {
+      if (this.btnFlg == 'create') {
+        this.btnFlg = 'search';
+      } else {
+        this.clearForm();
+      }
     }
   }
 });
@@ -38504,6 +38570,10 @@ var render = function() {
           ? _c("h3", { staticClass: "destination-create__ttl" }, [
               _vm._v("宛先人更新フォーム")
             ])
+          : _vm.btnFlg == "search"
+          ? _c("h3", { staticClass: "destination-create__ttl" }, [
+              _vm._v("宛先人検索フォーム")
+            ])
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -38838,10 +38908,29 @@ var render = function() {
                   { attrs: { type: "submit" }, on: { click: _vm.update } },
                   [_vm._v("更新")]
                 )
+              : _vm.btnFlg == "search"
+              ? _c(
+                  "button",
+                  { attrs: { type: "submit" }, on: { click: _vm.search } },
+                  [_vm._v("検索")]
+                )
               : _vm._e()
           ]
         )
       ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "changeBtn",
+          on: {
+            click: function($event) {
+              return _vm.changeForm()
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-exchange-alt" })]
+      ),
       _vm._v(" "),
       _vm.validateFlg != true
         ? _c(
@@ -39022,6 +39111,10 @@ var render = function() {
           : _vm.btnFlg == "update"
           ? _c("h3", { staticClass: "from-create__ttl" }, [
               _vm._v("差出人更新フォーム")
+            ])
+          : _vm.btnFlg == "search"
+          ? _c("h3", { staticClass: "from-create__ttl" }, [
+              _vm._v("差出人検索フォーム")
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -39302,10 +39395,29 @@ var render = function() {
                   { attrs: { type: "submit" }, on: { click: _vm.update } },
                   [_vm._v("更新")]
                 )
+              : _vm.btnFlg == "search"
+              ? _c(
+                  "button",
+                  { attrs: { type: "submit" }, on: { click: _vm.search } },
+                  [_vm._v("検索")]
+                )
               : _vm._e()
           ]
         )
       ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "changeBtn",
+          on: {
+            click: function($event) {
+              return _vm.changeForm()
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-exchange-alt" })]
+      ),
       _vm._v(" "),
       _vm.validateFlg != true
         ? _c(

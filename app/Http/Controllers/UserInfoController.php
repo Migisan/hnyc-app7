@@ -32,7 +32,6 @@ class UserInfoController extends Controller
      */
     public function set_update(){
         return Auth::user()->toJson();
-        // return From::where('id', $id)->where('user_id', Auth::id())->first()->toJson();
     }
 
     /**

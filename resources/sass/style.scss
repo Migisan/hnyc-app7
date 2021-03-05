@@ -296,6 +296,22 @@ h2{
   }
 }
 
+.changeBtn{
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  line-height: 75px;
+  text-align: center;
+  font-size: 36px;
+  background-color: $mainColor;
+  color: $mainWhiteFont;
+  cursor: pointer;
+  user-select: none;
+}
+
 /* 管理リストテンプレ */
 @mixin mng-lists{
   &__ttl{

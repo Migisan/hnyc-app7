@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function(){
   Route::post('/from/create', 'FromController@create');
   Route::get('/from/set_update/{id}', 'FromController@set_update');
   Route::post('/from/update/{id}', 'FromController@update');
+  Route::post('/from/search', 'FromController@search');
   Route::delete('/from/delete/{id}', 'FromController@delete');
   
   // 宛先人管理画面
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function(){
   Route::post('/destination/create', 'DestinationController@create');
   Route::get('/destination/set_update/{id}', 'DestinationController@set_update');
   Route::post('/destination/update/{id}', 'DestinationController@update');
+  Route::post('/destination/search', 'DestinationController@search');
   Route::delete('/destination/delete/{id}', 'DestinationController@delete');
 
   // 送付履歴管理画面

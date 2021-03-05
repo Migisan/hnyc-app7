@@ -58,4 +58,74 @@ class Destination extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    /**
+     * 姓検索(部分一致)
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchLastName($query, $param){
+        return $query->where('l_name', 'LIKE', '%' . $param . '%');
+    }
+    
+    /**
+     * 名検索(部分一致)
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchFirstName($query, $param){
+        return $query->where('f_name', 'LIKE', '%' . $param . '%');
+    }
+    
+    /**
+     * 都道府県検索
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchPrefecture($query, $param){
+        return $query->where('prefecture_id', $param);
+    }
+
+    /**
+     * 市町村検索
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchCity($query, $param){
+        return $query->where('city_id', $param);
+    }
+    
+    /**
+     * 番地等検索(部分一致)
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchAddressEtc($query, $param){
+        return $query->where('address_etc', 'LIKE', '%' . $param . '%');
+    }
+
+    /**
+     * 郵便番号検索(完全一致)
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchPostalCode($query, $param){
+        return $query->where('postal_code', $param);
+    }
+
+    /**
+     * お気に入り検索
+     * @param $query
+     * @param $param
+     * @return void
+     */
+    public function scopeSearchFavorite($query, $param){
+        return $query->where('favorite', $param);
+    }
+
 }

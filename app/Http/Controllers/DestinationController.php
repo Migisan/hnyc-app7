@@ -85,6 +85,41 @@ class DestinationController extends Controller
     }
 
     /**
+     * 宛先人検索
+     *
+     * @param Request $request
+     * @return json
+     */
+    public function search(Request $request){
+        $params = $request->all();
+        $destination = Destination::where('user_id', Auth::id());
+        
+        if($request->l_name){
+            $destination->searchLastName($request->l_name);
+        }
+        if($request->f_name){
+            $destination->searchFirstName($request->f_name);
+        }
+        if($request->prefecture_id){
+            $destination->searchPrefecture($request->prefecture_id);
+        }
+        if($request->city_id){
+            $destination->searchCity($request->city_id);
+        }
+        if($request->address_etc){
+            $destination->searchAddressEtc($request->address_etc);
+        }
+        if($request->postal_code){
+            $destination->searchPostalCode($request->postal_code);
+        }
+        if($request->favorite){
+            $destination->searchFavorite($request->favorite);
+        }
+
+        return $destination->with('prefecture', 'city')->get()->toJson();
+    }
+
+    /**
      * 宛先人削除
      *
      * @param $id
